@@ -38,18 +38,8 @@ class HideNonCommercialUseStatusBarActivity : ProjectActivity {
     }
 
     private fun hideStatusBarBadge(project: Project): Int {
-        LicenseWidgetSuppressor.disableRegisteredWidgets()
-        removeLicenseWidgets(project)
-
         return candidateRoots(project).sumOf { root ->
             NonCommercialUseStatusBarHider.hideIn(root)
-        }
-    }
-
-    private fun removeLicenseWidgets(project: Project) {
-        val statusBar = WindowManager.getInstance().getStatusBar(project) ?: return
-        LicenseWidgetSuppressor.widgetIds.forEach { widgetId ->
-            statusBar.removeWidget(widgetId)
         }
     }
 
