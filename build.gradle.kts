@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "dev.zeeshan.jetbrains"
-version = "0.1.4"
+version = "0.1.5"
 
 val marketplaceToken = providers
     .gradleProperty("intellijPlatformPublishingToken")
