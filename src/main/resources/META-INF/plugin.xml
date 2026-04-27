@@ -10,6 +10,8 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <applicationInitializedListener implementation="dev.zeeshan.jetbrains.hideNonCommercialUse.DisableLicenseWidgetEarlyActivity" order="first"/>
+        <projectPreInit implementation="dev.zeeshan.jetbrains.hideNonCommercialUse.DisableLicenseWidgetEarlyActivity" order="first"/>
         <postStartupActivity implementation="dev.zeeshan.jetbrains.hideNonCommercialUse.HideNonCommercialUseStatusBarActivity"/>
     </extensions>
 </idea-plugin>

@@ -38,16 +38,17 @@ class HideNonCommercialUseStatusBarActivity : ProjectActivity {
     }
 
     private fun hideStatusBarBadge(project: Project): Int {
-        removeTrialWidget(project)
+        LicenseWidgetSuppressor.disableRegisteredWidgets()
+        removeLicenseWidgets(project)
 
         return candidateRoots(project).sumOf { root ->
             NonCommercialUseStatusBarHider.hideIn(root)
         }
     }
 
-    private fun removeTrialWidget(project: Project) {
+    private fun removeLicenseWidgets(project: Project) {
         val statusBar = WindowManager.getInstance().getStatusBar(project) ?: return
-        LICENSE_WIDGET_IDS.forEach { widgetId ->
+        LicenseWidgetSuppressor.widgetIds.forEach { widgetId ->
             statusBar.removeWidget(widgetId)
         }
     }
@@ -66,10 +67,6 @@ class HideNonCommercialUseStatusBarActivity : ProjectActivity {
     }
 
     private companion object {
-        private val LICENSE_WIDGET_IDS = listOf(
-            "NonCommercial",
-            "TrialStatusBarWidget",
-        )
         private const val RETRY_DELAY_MS = 500
         private const val MAX_ATTEMPTS = 720
     }
