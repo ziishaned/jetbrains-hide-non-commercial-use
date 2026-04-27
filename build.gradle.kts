@@ -9,6 +9,10 @@ plugins {
 group = "dev.zeeshan.jetbrains"
 version = "0.1.4"
 
+val marketplaceToken = providers
+    .gradleProperty("intellijPlatformPublishingToken")
+    .orElse(providers.environmentVariable("JETBRAINS_MARKETPLACE_TOKEN"))
+
 repositories {
     mavenCentral()
     intellijPlatform {
@@ -42,9 +46,20 @@ intellijPlatform {
             Initial version.
         """.trimIndent()
     }
+
+    publishing {
+        token = marketplaceToken
+        channels = listOf("default")
+        hidden = false
+    }
 }
 
 tasks {
+    buildPlugin {
+        archiveFileName.set("jetbrains-hide-non-commercial-use-${project.version}.zip")
+        destinationDirectory.set(layout.buildDirectory.dir("distributions"))
+    }
+
     withType<JavaCompile> {
         sourceCompatibility = "21"
         targetCompatibility = "21"
