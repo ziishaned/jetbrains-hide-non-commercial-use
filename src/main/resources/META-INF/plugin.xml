@@ -1,0 +1,15 @@
+<idea-plugin>
+    <id>dev.zeeshan.jetbrains.hide-non-commercial-use</id>
+    <name>Hide Non-commercial Use Status</name>
+    <vendor email="zeeshan@example.com">Zeeshan</vendor>
+
+    <description><![CDATA[
+        Hides the visible "Non-commercial use" badge from the IDE status bar.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="dev.zeeshan.jetbrains.hideNonCommercialUse.HideNonCommercialUseStatusBarActivity"/>
+    </extensions>
+</idea-plugin>
