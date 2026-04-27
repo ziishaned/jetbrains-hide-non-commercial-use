@@ -43,6 +43,6 @@ Install it from a JetBrains IDE with `Settings | Plugins | Install Plugin from D
 
 ## How It Works
 
-The plugin disables JetBrains' `NonCommercial` and `TrialStatusBarWidget` status bar widgets during application initialization and project pre-initialization. After a project opens, it also removes either widget from the status bar and checks the visible Swing tree for text matching `Non-commercial use` as a fallback.
+The plugin disables JetBrains' `NonCommercial` and `TrialStatusBarWidget` status bar widgets during application initialization. After a project opens, it also removes either widget from the status bar and checks the visible Swing tree for text matching `Non-commercial use` as a fallback.
 
 The search retries briefly because the status bar can finish rendering after project startup.
