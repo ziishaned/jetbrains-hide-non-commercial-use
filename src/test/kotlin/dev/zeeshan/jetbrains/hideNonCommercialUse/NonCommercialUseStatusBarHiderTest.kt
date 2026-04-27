@@ -10,6 +10,14 @@ import javax.swing.JPanel
 
 class NonCommercialUseStatusBarHiderTest {
     @Test
+    fun `knows current JetBrains license status widget IDs`() {
+        assertEquals(
+            setOf("NonCommercial", "TrialStatusBarWidget"),
+            LicenseStatusBarWidgetHider.widgetIds,
+        )
+    }
+
+    @Test
     fun `hides matching label nested inside status bar component`() {
         val root = JPanel(BorderLayout())
         val left = JLabel("playground")

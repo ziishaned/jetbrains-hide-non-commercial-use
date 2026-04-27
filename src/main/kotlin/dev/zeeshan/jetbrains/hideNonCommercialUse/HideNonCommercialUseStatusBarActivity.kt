@@ -38,22 +38,20 @@ class HideNonCommercialUseStatusBarActivity : ProjectActivity {
     }
 
     private fun hideStatusBarBadge(project: Project): Int {
-        return candidateRoots(project).sumOf { root ->
+        val statusBar = WindowManager.getInstance().getStatusBar(project)
+        val hiddenWidgets = statusBar?.let { LicenseStatusBarWidgetHider.hideWidgetsIn(it) } ?: 0
+
+        return hiddenWidgets + candidateRoots(statusBar).sumOf { root ->
             NonCommercialUseStatusBarHider.hideIn(root)
         }
     }
 
-    private fun candidateRoots(project: Project): List<Container> {
-        val statusBarComponent = WindowManager
-            .getInstance()
-            .getStatusBar(project)
-            ?.component
-
+    private fun candidateRoots(statusBar: com.intellij.openapi.wm.StatusBar?): List<Container> {
         val windows = Window
             .getWindows()
             .filter { it.isShowing }
 
-        return (listOfNotNull(statusBarComponent) + windows).distinct()
+        return (listOfNotNull(statusBar?.component) + windows).distinct()
     }
 
     private companion object {
